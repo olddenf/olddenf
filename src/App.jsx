@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Moon, Sun, Menu, X, Mail, Phone, MessageCircle, ArrowRight, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Moon, Sun, Menu, X, Mail, Phone, MessageCircle, ArrowRight, Send, CheckCircle, Loader2, ExternalLink, GitBranch, BookOpen, Sparkles } from 'lucide-react';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -7,7 +7,7 @@ function App() {
   const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [formErrors, setFormErrors] = useState({});
-  const [formStatus, setFormStatus] = useState('idle'); // idle, loading, success, error
+  const [formStatus, setFormStatus] = useState('idle');
 
   useEffect(() => {
     if (darkMode) {
@@ -50,14 +50,14 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
+
     setFormStatus('loading');
-    
+
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     setFormStatus('success');
     setFormData({ name: '', email: '', message: '' });
-    
+
     setTimeout(() => setFormStatus('idle'), 3000);
   };
 
@@ -69,18 +69,37 @@ function App() {
     }
   };
 
-  const projects = [];
+  const projects = [
+    {
+      id: 1,
+      title: '易数乾坤',
+      description: 'AI起卦彩票辅助工具 - 结合传统易经文化与现代AI技术，为用户提供独特的彩票选号体验。支持双色球、大乐透等多种玩法，通过易经卦象解读与AI智能分析，为用户带来有趣的选号体验。',
+      link: 'https://github.com/olddenf/yishu-',
+      github: 'https://github.com/olddenf/yishu-',
+      demo: '/yishu/index.html',
+      tags: ['AI', '易经', '小程序', '前端开发'],
+      icon: BookOpen
+    },
+    {
+      id: 2,
+      title: '更多项目',
+      description: '持续整理和开发中，敬请期待更多精彩项目。如果你有项目需求，欢迎直接联系我！',
+      link: '#',
+      github: 'https://github.com/olddenf',
+      demo: '#',
+      tags: ['即将上线'],
+      icon: Sparkles
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-500">
-      {/* 导航栏 */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
         <div className="max-w-5xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
           <a href="#" className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             olddenf
           </a>
-          
-          {/* 桌面导航 */}
+
           <nav className="hidden md:flex items-center space-x-8">
             {['关于', '项目', '联系'].map((item, index) => (
               <a
@@ -100,8 +119,7 @@ function App() {
               {darkMode ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </nav>
-          
-          {/* 移动端菜单按钮 */}
+
           <div className="md:hidden flex items-center space-x-3">
             <button
               onClick={toggleDarkMode}
@@ -119,8 +137,7 @@ function App() {
             </button>
           </div>
         </div>
-        
-        {/* 移动端导航菜单 */}
+
         {mobileMenuOpen && (
           <div className="md:hidden bg-white dark:bg-slate-900/98 backdrop-blur-lg border-t border-slate-200 dark:border-slate-700 shadow-lg">
             <nav className="max-w-5xl mx-auto px-4 py-4 flex flex-col space-y-1">
@@ -140,7 +157,6 @@ function App() {
       </header>
 
       <main>
-        {/* 英雄区域 */}
         <section id="about" className="min-h-screen flex items-center pt-20 pb-20 md:pt-0">
           <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
             <div className="space-y-6 md:space-y-8">
@@ -148,7 +164,7 @@ function App() {
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                 <span className="text-sm font-medium text-blue-600 dark:text-blue-400">可接外包 · 全栈开发</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
                 你好，我是 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">olddenf</span>
               </h1>
@@ -158,29 +174,29 @@ function App() {
               <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 mt-2">
                 独立承接 · 定制交付
               </p>
-              
+
               <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                专注轻量级Web应用、小程序、H5定制开发，提供从需求分析到上线交付的全流程服务。
+                专注企业级Web应用、小程序、H5定制开发，提供从需求分析到上线交付的全流程服务。
                 <br className="hidden md:block" />
                 高效沟通，按时交付，售后无忧。
               </p>
-              
+
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <a 
-                  href="#contact" 
+                <a
+                  href="#contact"
                   className="group inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5"
                 >
                   <span>立即咨询</span>
                   <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
-                <a 
-                  href="#projects" 
+                <a
+                  href="#projects"
                   className="inline-flex items-center justify-center px-8 py-4 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300"
                 >
                   查看案例
                 </a>
               </div>
-              
+
               <div className="flex flex-wrap justify-center gap-6 pt-4">
                 {['React', 'Vue', 'Node.js', 'TypeScript', '小程序', '云部署'].map(skill => (
                   <span key={skill} className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 text-sm text-slate-600 dark:text-slate-400 rounded-full">
@@ -192,7 +208,6 @@ function App() {
           </div>
         </section>
 
-        {/* 项目展示 */}
         <section id="projects" className="py-24 bg-slate-50 dark:bg-slate-800/50">
           <div className="max-w-5xl mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
@@ -203,34 +218,83 @@ function App() {
                 精选商业项目，展示专业开发能力
               </p>
             </div>
-            
+
             {projects.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {projects.map((project, index) => (
-                  <div 
-                    key={project.id} 
-                    className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="aspect-video overflow-hidden bg-slate-100 dark:bg-slate-700">
-                      <img 
-                        src={project.image} 
-                        alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
+                {projects.map((project, index) => {
+                  const Icon = project.icon;
+                  return (
+                    <div
+                      key={project.id}
+                      className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="aspect-video overflow-hidden bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 dark:from-blue-900/30 dark:via-indigo-900/30 dark:to-purple-900/30 flex items-center justify-center relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        
+                        <div className="text-center z-10 p-6">
+                          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                            <Icon size={40} className="text-white" />
+                          </div>
+                          <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">{project.title}</h3>
+                          <div className="flex flex-wrap justify-center gap-2 mt-3">
+                            {project.tags.map(tag => (
+                              <span key={tag} className="px-2 py-1 bg-white/80 dark:bg-slate-700/80 text-xs text-slate-600 dark:text-slate-300 rounded-full">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="flex gap-2">
+                            <div className="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600" />
+                            <div className="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600" />
+                            <div className="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-600" />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">{project.title}</h3>
+                        <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 leading-relaxed">{project.description}</p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {project.tags.map(tag => (
+                            <span key={tag} className="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-xs text-slate-600 dark:text-slate-300 rounded-full">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="flex gap-3">
+                          {project.github && project.github !== '#' && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200"
+                            >
+                              <GitBranch size={16} />
+                              GitHub
+                            </a>
+                          )}
+                          {project.demo && project.demo !== '#' && (
+                            <a
+                              href={project.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-all duration-200"
+                            >
+                              <ExternalLink size={16} />
+                              查看演示
+                            </a>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">{project.title}</h3>
-                      <p className="text-slate-500 dark:text-slate-400 text-sm mb-4">{project.description}</p>
-                      <a 
-                        href={project.link} 
-                        className="inline-flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
-                      >
-                        查看详情 <ArrowRight size={14} className="ml-1 transition-transform group-hover:translate-x-1" />
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-16">
@@ -243,7 +307,7 @@ function App() {
                 <p className="text-slate-500 dark:text-slate-400 max-w-md mx-auto mb-6">
                   正在整理过往项目案例，敬请期待。如有合作需求，欢迎直接联系。
                 </p>
-                <a 
+                <a
                   href="#contact"
                   className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg"
                 >
@@ -255,7 +319,6 @@ function App() {
           </div>
         </section>
 
-        {/* 联系方式 */}
         <section id="contact" className="py-24">
           <div className="max-w-5xl mx-auto px-4 md:px-6">
             <div className="text-center mb-16">
@@ -266,9 +329,8 @@ function App() {
                 有项目需求？欢迎随时沟通，期待与您合作
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
-              {/* 联系卡片 */}
               <div className="space-y-4">
                 {[
                   { icon: Mail, label: '邮箱', value: 'olddenf@163.com', href: 'mailto:olddenf@163.com' },
@@ -290,13 +352,12 @@ function App() {
                   </a>
                 ))}
               </div>
-              
-              {/* 联系表单 */}
+
               <div className="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-6 md:p-8">
                 <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-6">
                   发送消息
                 </h3>
-                
+
                 {formStatus === 'success' ? (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <CheckCircle size={56} className="text-green-500 mb-4" />
@@ -313,8 +374,8 @@ function App() {
                       <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         姓名 <span className="text-red-500">*</span>
                       </label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         id="name"
                         name="name"
                         value={formData.name}
@@ -324,13 +385,13 @@ function App() {
                       />
                       {formErrors.name && <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>}
                     </div>
-                    
+
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         邮箱 <span className="text-red-500">*</span>
                       </label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         id="email"
                         name="email"
                         value={formData.email}
@@ -340,12 +401,12 @@ function App() {
                       />
                       {formErrors.email && <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>}
                     </div>
-                    
+
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         项目需求 <span className="text-red-500">*</span>
                       </label>
-                      <textarea 
+                      <textarea
                         id="message"
                         name="message"
                         rows={4}
@@ -356,8 +417,8 @@ function App() {
                       />
                       {formErrors.message && <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>}
                     </div>
-                    
-                    <button 
+
+                    <button
                       type="submit"
                       disabled={formStatus === 'loading'}
                       className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center gap-2"
@@ -382,7 +443,6 @@ function App() {
         </section>
       </main>
 
-      {/* 页脚 */}
       <footer className="py-12 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-700">
         <div className="max-w-5xl mx-auto px-4 md:px-6 text-center">
           <p className="text-slate-500 dark:text-slate-400 text-sm">
